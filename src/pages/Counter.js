@@ -4,9 +4,9 @@ function Counter() {
   const initialState = 0;
   const reducer = (state, action) => {
     if (action.type === "INCREMENT") {
-      return state + 1;
+      return state + action.payload.count;
     } else if (action.type === "DECREMENT") {
-      return state - 1;
+      return state - action.payload.count;
     }
   };
 
@@ -19,14 +19,18 @@ function Counter() {
 
         <div className="space-x-5">
           <button
-            onClick={() => dispatch({ type: "INCREMENT" })}
+            onClick={() =>
+              dispatch({ type: "INCREMENT", payload: { count: 5 } })
+            }
             className="text-lg bg-primary/40 px-2 py-1 rounded-full"
           >
             Increment
           </button>
 
           <button
-            onClick={() => dispatch({ type: "DECREMENT" })}
+            onClick={() =>
+              dispatch({ type: "DECREMENT", payload: { count: 5 } })
+            }
             className="text-lg bg-red-800/40 px-2 py-1 rounded-full"
           >
             Decrement
