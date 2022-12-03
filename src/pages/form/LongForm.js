@@ -1,46 +1,9 @@
 import React, { useReducer } from "react";
+import { actionTypes } from "../../state/actionTypes";
+import { initialState, reducer } from "../../state/fornReducer";
 
 function LongForm() {
-  const initialState = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    gender: "",
-    education: "",
-    quantity: 0,
-    feedback: "",
-    term: false,
-  };
-
-  const reducer = (state, action) => {
-    // console.log(action);
-    switch (action.type) {
-      case "INPUT":
-        return {
-          ...state,
-          [action.payload.name]: action.payload.value,
-        };
-      case "TOGGLE":
-        return {
-          ...state,
-          term: !state.term,
-        };
-      case "INCREMENT":
-        return {
-          ...state,
-          quantity: state.quantity + 1,
-        };
-      case "DECREMENT":
-        if (state.quantity > 0) {
-          return {
-            ...state,
-            quantity: state.quantity - 1,
-          };
-        }
-      default:
-        return state;
-    }
-  };
+  
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -66,7 +29,7 @@ function LongForm() {
             id="firstName"
             onBlur={(e) =>
               dispatch({
-                type: "INPUT",
+                type: actionTypes.INPUT,
                 payload: {
                   name: e.target.name,
                   value: e.target.value,
@@ -86,7 +49,7 @@ function LongForm() {
             id="lastName"
             onBlur={(e) =>
               dispatch({
-                type: "INPUT",
+                type: actionTypes.INPUT,
                 payload: {
                   name: e.target.name,
                   value: e.target.value,
@@ -106,7 +69,7 @@ function LongForm() {
             id="email"
             onBlur={(e) =>
               dispatch({
-                type: "INPUT",
+                type: actionTypes.INPUT,
                 payload: {
                   name: e.target.name,
                   value: e.target.value,
@@ -127,7 +90,7 @@ function LongForm() {
                 value="male"
                 onClick={(e) =>
                   dispatch({
-                    type: "INPUT",
+                    type: actionTypes.INPUT,
                     payload: {
                       name: e.target.name,
                       value: e.target.value,
@@ -147,7 +110,7 @@ function LongForm() {
                 value="female"
                 onClick={(e) =>
                   dispatch({
-                    type: "INPUT",
+                    type: actionTypes.INPUT,
                     payload: {
                       name: e.target.name,
                       value: e.target.value,
@@ -167,7 +130,7 @@ function LongForm() {
                 value="other"
                 onClick={(e) =>
                   dispatch({
-                    type: "INPUT",
+                    type: actionTypes.INPUT,
                     payload: {
                       name: e.target.name,
                       value: e.target.value,
@@ -190,7 +153,7 @@ function LongForm() {
             id="education"
             onChange={(e) =>
               dispatch({
-                type: "INPUT",
+                type: actionTypes.INPUT,
                 payload: {
                   name: e.target.name,
                   value: e.target.value,
@@ -209,7 +172,7 @@ function LongForm() {
           <label className="mb-3">Number of PCs</label>
           <div className="flex justify-between items-center gap-2 ">
             <button
-              onClick={() => dispatch({ type: "DECREMENT" })}
+              onClick={() => dispatch({ type: actionTypes.DECREMENT })}
               className="bg-indigo-500 text-lg text-white rounded h-10 w-10 "
             >
               -
@@ -218,7 +181,7 @@ function LongForm() {
               <span className="text-lg">{state.quantity}</span>
             </div>
             <button
-              onClick={() => dispatch({ type: "INCREMENT" })}
+              onClick={() => dispatch({ type: actionTypes.INCREMENT })}
               className="bg-indigo-500 text-lg text-white rounded h-10 w-10"
             >
               +
@@ -237,7 +200,7 @@ function LongForm() {
             rows="4"
             onBlur={(e) =>
               dispatch({
-                type: "INPUT",
+                type: actionTypes.INPUT,
                 payload: {
                   name: e.target.name,
                   value: e.target.value,
@@ -254,7 +217,7 @@ function LongForm() {
               type="checkbox"
               name="term"
               id="terms"
-              onClick={() => dispatch({ type: "TOGGLE" })}
+              onClick={() => dispatch({ type: actionTypes.TOGGLE })}
               className="mr-3"
             />
             <label for="terms">I agree to terms and conditions</label>
